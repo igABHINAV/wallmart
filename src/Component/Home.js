@@ -156,7 +156,7 @@ const Home = () => {
                     </button>
                 )}
             </div>
-            {showPDF && <PDFBill items={items} totalPrice={totalPrice} />}
+             <PDFBill items={items} totalPrice={totalPrice} />
         </div>
     );
 };
