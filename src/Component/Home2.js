@@ -1,5 +1,23 @@
 import React, { useState } from 'react';
 import Home3 from './Home3';
+// ----------------------------------------------------------------------------------------------------
+
+const productStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '20px',
+    border: '1px solid #ccc',
+    margin: '10px',
+    width: '200px',
+};
+
+const imageStyles = {
+    width: '150px',
+    height: '150px',
+    marginBottom: '10px',
+};
+// ----------------------------------------------------------------------------------------------------
 
 const products = [
     { id: 1, name: 'Product 1', price: '$10', image: 'https://apod.nasa.gov/apod/image/2308/sombrero_spitzer_3000.jpg', description: 'Description for Product 1' },
@@ -24,22 +42,6 @@ const products = [
     
 
 ];
-
-const productStyles = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '20px',
-    border: '1px solid #ccc',
-    margin: '10px',
-    width: '200px',
-};
-
-const imageStyles = {
-    width: '150px',
-    height: '150px',
-    marginBottom: '10px',
-};
 
 const Home2 = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../Context.js/ContexT';
 
 const NavBar = () => {
+    // ----------------------------------------------------------------------------------------------------
+
     const navStyles = {
         display: 'flex',
         justifyContent: 'space-between',
@@ -47,7 +50,15 @@ const NavBar = () => {
         transformOrigin: 'left',
         transition: 'transform 0.3s',
     };
-
+    const pointsStyles = {
+        // Add yellow color and additional styles for points
+        color: '#f0c14b', // Yellow color
+        marginLeft: '10px', // Adjust spacing
+        fontSize: '16px', // Adjust font size
+        fontWeight: 'bold', // Make it bold
+    };
+// ----------------------------------------------------------------------------------------------------
+    let { points, setpoints } = useContext(AuthContext);
     const handleHover = (event) => {
         event.target.style.color = '#f0c14b';
         event.target.querySelector('.underline').style.transform = 'scaleX(1)';
@@ -101,6 +112,7 @@ const NavBar = () => {
                         Upload
                         <span className="underline" style={underlineStyles}></span>
                     </Link>
+                    <span style={pointsStyles}>{points} points</span>
                 </div>
             </div>
         </nav>

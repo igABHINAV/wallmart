@@ -3,6 +3,25 @@ import OlxModel from './OlxModel';
 
 
 const OlxHome = () => {
+    // ----------------------------------------------------------------------------------------------------
+
+    const productStyles = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px',
+        border: '1px solid #ccc',
+        margin: '10px',
+        width: '200px',
+    };
+
+    const imageStyles = {
+        width: '150px',
+        height: '150px',
+        marginBottom: '10px',
+    };
+// ----------------------------------------------------------------------------------------------------
+
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     const handleAddToCart = (product) => {
@@ -29,22 +48,6 @@ const OlxHome = () => {
         { id: 2, name: 'Product 2',  location :'Delhi',price: '15', image: 'https://apod.nasa.gov/apod/image/2308/sombrero_spitzer_3000.jpg', description: 'Description for Product 2' },
         
     ];
-
-    const productStyles = {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: '20px',
-        border: '1px solid #ccc',
-        margin: '10px',
-        width: '200px',
-    };
-
-    const imageStyles = {
-        width: '150px',
-        height: '150px',
-        marginBottom: '10px',
-    };
 
 
     return (

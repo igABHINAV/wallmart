@@ -5,22 +5,25 @@ import Home3 from "./Component/Home3";
 import NavBar from "./Component/NavBar";
 import OlxHome from "./Component/OLX/OlxHome";
 import OlxUpload from "./Component/OLX/OlxUpload";
+import { AuthProvider } from "./Context.js/ContexT";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar />
-        <br/>
-        <br/>
-        <Routes>
-          <Route path="/" element={<Home2 />} />
-          <Route path="/getinshop" element={<Home />} />
-          <Route path="/olx" element={<OlxHome />} />
-          {/* <Route path="/shop" element={<Home3/>} /> */}
-          <Route path="/upload" element={<OlxUpload/>} />
+        <AuthProvider>
+          <NavBar />
+          <br />
+          <br />
+          <Routes>
+            <Route path="/" element={<Home2 />} />
+            <Route path="/getinshop" element={<Home />} />
+            <Route path="/olx" element={<OlxHome />} />
+            {/* <Route path="/shop" element={<Home3/>} /> */}
+            <Route path="/upload" element={<OlxUpload />} />
 
-        </Routes>
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );

@@ -1,13 +1,17 @@
 import { useState } from "react";
-import './Form.css'
+import './OlxUpload.css'
 const OlxUpload = () => {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [description, setDescription] = useState('');
+    const [showSuccessModal, setShowSuccessModal] = useState(false); // New state
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Handle form submission logic here
+        // Simulate submission success
+        // For real implementation, handle form submission logic here
+        // and then setShowSuccessModal(true);
+        setShowSuccessModal(true);
     };
     return (
         <div className="form-container">
@@ -18,9 +22,6 @@ const OlxUpload = () => {
                     <label htmlFor="name">Image:</label>
                         <input
                             type="file"
-                            id="name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
                             required
                         />
                         <br/>
@@ -58,6 +59,14 @@ const OlxUpload = () => {
                         Submit
                     </button>
                 </form>
+                {showSuccessModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <p>Uploaded successfully!</p>
+                        <button onClick={() => setShowSuccessModal(false)}>Close</button>
+                    </div>
+                </div>
+            )}
             </div>
         </div>
     )
