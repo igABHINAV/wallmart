@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import QrReader from 'react-qr-scanner';
+import './Home.css';
 
 const Home = () => {
     const [qrText, setQrText] = useState('');
     const [cameraOpen, setCameraOpen] = useState(false);
     const [items, setItems] = useState([]);
+    const [money,setmoney] = useState(100);
 
     const handleScan = (data) => {
         if (data) {
-            setItems(prevItems => [...prevItems, data.text]); // Append scanned QR data to items array
-            setQrText(data.text);
-            setCameraOpen(false);
+            try {
+                const scannedItem = JSON.parse(data.text);
+                setItems(prevItems => [...prevItems, scannedItem]);
+                setQrText(data.text);
+                setCameraOpen(false);
+            } catch (error) {
+                console.error('Error parsing JSON data:', error);
+            }
         }
     };
 
@@ -23,10 +30,14 @@ const Home = () => {
         setCameraOpen(prevCameraOpen => !prevCameraOpen);
     };
 
+    // Calculate the total price of scanned items
+    const totalPrice = items.reduce((total, item) => total + item.price, 0);
+
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: '100vh', padding: '20px' }}>
-            <h1>Welcome To Our Store</h1>
-            <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto', padding: '20px' }}>
+        <div className="home-container">
+            <h1 className="welcome-text">Welcome To Our Store</h1>
+            
+            <div className={`qr-container ${cameraOpen ? 'camera-open' : ''}`}>
                 {cameraOpen ? (
                     <React.Fragment>
                         <QrReader
@@ -35,25 +46,36 @@ const Home = () => {
                             onScan={handleScan}
                             style={{ width: '100%' }}
                         />
-                        <button onClick={handleToggleCamera} style={{ marginTop: '10px' }}>Close Camera</button>
+                        <button onClick={handleToggleCamera} className="close-button">Close Camera</button>
                     </React.Fragment>
                 ) : (
-                    <button onClick={handleToggleCamera} style={{ width: '100%' }}>Scan</button>
+                    <></>
                 )}
             </div>
-            {qrText && <p>{qrText}</p>}
             {items.length > 0 && (
-                <div>
-                    <h2>Scanned Items:</h2>
-                    <ul>
+                <div className="scanned-items-container">
+                    <h2 className="scanned-items-heading">Your items :-</h2>
+                    <div className="item-cards-container">
                         {items.map((item, index) => (
-                            <li key={index}>{item}</li>
+                            <div key={index} className="item-card">
+                                <p>{item.name}</p>
+                                <p> ₹{item.price}</p>
+                                <p>{item.description}</p>
+                            </div>
                         ))}
-                    </ul>
-
+                    </div>
                 </div>
             )}
-            <button >Buy now</button>
+            {/* Display the total price */}
+            {totalPrice <= 0 ? (<></>) : (<div className="total-price-card">
+                <p className="total-price">Total Price:₹{totalPrice.toFixed(2)}</p>
+            </div>)}
+
+            <div className="button-container">
+                <button onClick={handleToggleCamera} className="scan-button">Scan</button>
+                {totalPrice > money ? (<></>) : (<button className="buy-button">Buy now</button>)}
+                
+            </div>
         </div>
     );
 };
