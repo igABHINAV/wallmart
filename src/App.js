@@ -19,7 +19,7 @@ function App() {
             <Route path="/" element={<Home2 />} />
             <Route path="/getinshop" element={<Home />} />
             <Route path="/olx" element={<OlxHome />} />
-            {/* <Route path="/shop" element={<Home3/>} /> */}
+            <div>hi</div>
             <Route path="/upload" element={<OlxUpload />} />
 
           </Routes>
